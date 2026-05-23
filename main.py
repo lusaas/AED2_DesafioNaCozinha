@@ -1,5 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List
+from gerenciador import GerenciadorRestaurante
+from api_client import MealDBService
 
 @dataclass
 class Receita:
