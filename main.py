@@ -1,29 +1,29 @@
-from dataclasses import dataclass, field
-from typing import List
-from gerenciador import GerenciadorRestaurante
+from gerenciador import LivroReceitas
 from api_client import MealDBService
 
-@dataclass
-class Receita:
-    nome: str
-    id: int
-    categoria: str
-    tempo_preparo: int
-    ingredientes: List[str] = field(default_factory=list)
-    preco: float
+def main():
+    # Inicializa os módulos do sistema
+    livro = LivroReceitas()
+    api = MealDBService()
 
-class GerenciadorRestaurante:
-    def __init__(self):
-        self.receitas = []
+    print("=== Inicializando Módulo 1: Livro de Receitas ===")
+    
+    pratos_para_buscar = ["Arrabiata", "Burger", "Wonton Soup"]
 
-    def adiciona_receita:
-        self.receitas.append(receita)
-    
-    def busca_nome(self, nome:str):
-        return [r for r in self.receitas if nome.lower() in r.nome.lower()]
-    
-    def busca_id(self, id_busca:int):
-        for r in self.receitas:
-            if r.id == id_busca:
-                return r 
-        return None
+    print("\nBuscando pratos na API do TheMealDB...")
+    for nome in pratos_para_buscar:
+        receita_api = api.buscar_receita_por_nome(nome)
+        if receita_api:
+            livro.armazenar_receita(receita_api)
+        else:
+            print(f"Não foi possível encontrar: {nome}")
+
+    livro.listar_todas()
+
+    print("--- Testando Busca por Nome: 'burger' ---")
+    resultados = livro.buscar_por_nome("burger")
+    for r in resultados:
+        print(f"Encontrado: {r.nome} (ID: {r.id})")
+
+if __name__ == "__main__":
+    main()
