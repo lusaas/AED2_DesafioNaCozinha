@@ -123,7 +123,7 @@ def main():
             if id_busca.isdigit():
                 r = hash_sistema.buscar(int(id_busca))
                 if r:
-                    print(f"\nReceita Encontrada:\n  Nome: {r.nome}\n  Categoria: {r.categoria}\n  Custo: R$ {r.custo}\n  Tempo: {r.tempo_preparo} min\n  Ingredientes: {', '.join(r.ingredientes)}")
+                    print(f"\nReceita Encontrada:\n  Nome: {r.nome}\n  Categoria: {r.categoria}\n  Avaliação: {r.avaliacao}\nCusto: R$ {r.custo}\n  Tempo: {r.tempo_preparo} min\n  Ingredientes: {', '.join(r.ingredientes)}")
                 else:
                     print("\nID não encontrado na Tabela Hash.")
             else:
@@ -163,6 +163,6 @@ def main():
             break
         else:
             print("\nOpcao invalida. Escolha de 1 a 7.")
-            
+
 if __name__ == "__main__":
     main()
