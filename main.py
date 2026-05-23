@@ -1,8 +1,8 @@
 import json
 from receita import Receita
-# Importando as estruturas de dados que VOCÊ vai construir do zero para a matéria:
 from arvore_trie import ArvoreTrie
 from tabela_hash import TabelaHash
+from modo_chef import ModuloChef
 
 def carregar_receitas_do_json(caminho_arquivo: str) -> list:
     """Lê o arquivo de backup local e transforma em objetos da classe Receita."""
@@ -14,7 +14,7 @@ def carregar_receitas_do_json(caminho_arquivo: str) -> list:
         for meal_data in dados_brutos:
             id_meal = meal_data["idMeal"]
             
-            # Simulando os metadados fixos através do ID (idêntico ao que fizemos antes)
+            # Semente fixa para simular custos e tempos estáveis por ID
             import random
             random.seed(int(id_meal))
             categoria = meal_data.get("strCategory", "").lower()
@@ -30,16 +30,14 @@ def carregar_receitas_do_json(caminho_arquivo: str) -> list:
                 custo = round(random.uniform(20.0, 50.0), 2)
             
             avaliacao = round(random.uniform(3.5, 5.0), 1)
-            random.seed(None) # Reseta o random
+            random.seed(None)
 
-            # Coleta de ingredientes
             ingredientes = []
             for i in range(1, 21):
                 ingrediente = meal_data.get(f"strIngredient{i}")
                 if ingrediente and ingrediente.strip():
                     ingredientes.append(ingrediente.strip().lower())
 
-            # Cria o objeto estável
             receita = Receita(
                 id=int(id_meal),
                 nome=meal_data["strMeal"],
@@ -53,52 +51,118 @@ def carregar_receitas_do_json(caminho_arquivo: str) -> list:
             
         return lista_receitas
     except FileNotFoundError:
-        print(f"Erro: O arquivo '{caminho_arquivo}' não foi encontrado. Execute o capturar_dados.py primeiro!")
+        print(f"Erro: Arquivo '{caminho_arquivo}' não encontrado. Execute 'capturar_dados.py' primeiro!")
         return []
 
 def main():
-    print("==================================================")
-    print("       DESAFIO NA COZINHA - SISTEMA AED2          ")
-    print("==================================================")
-
-    # 1. Carrega os dados salvos localmente (Garantia de funcionamento offline)
     receitas_salvas = carregar_receitas_do_json("receitas_locais.json")
     if not receitas_salvas:
         return
 
-    print(f"{len(receitas_salvas)} receitas carregadas com sucesso do arquivo local.")
+    trie_nomes = ArvoreTrie()       
+    trie_categorias = ArvoreTrie()  
+    hash_sistema = TabelaHash() 
+    chef_guloso = ModuloChef(receitas_salvas)
 
-    # 2. Inicializa as estruturas manuais obrigatórias pelo edital
-    trie_nomes = ArvoreTrie()       # Técnica 1: Árvore Trie (para autocompletar/prefixos)
-    hash_ingredientes = TabelaHash() # Técnica 2: Tabela Hash (para busca rápida e Modo Investigação)
-
-    # 3. Alimenta as estruturas de dados com as receitas
-    print("Indexando receitas nas estruturas de dados customizadas...")
     for r in receitas_salvas:
         trie_nomes.inserir(r.nome, r)
-        hash_ingredientes.inserir(r.id, r)
+        trie_categorias.inserir(r.categoria, r) 
+        hash_sistema.inserir(r.id, r)
 
-    print("Estruturas prontas para consulta!\n")
+    while True:
+        print("\n" + "="*50)
+        print(f"{'SISTEMA DESAFIO NA COZINHA (AED2)':^50}")
+        print("="*50)
+        print("1. Modo Consulta: Buscar por Prefixo do NOME (via TRIE)")
+        print("2. Modo Consulta: Filtrar por Categoria (via TRIE)")
+        print("3. Modo Consulta: Buscar por Ingrediente (via HASH)")
+        print("4. Modo Consulta: Buscar por ID (via HASH)")
+        print("5. Modo Investigação: Varredura Anti-Sabotagem (via HASH)")
+        print("6. Modo Chef: Algoritmo Guloso (Menu Econômico)")
+        print("7. Sair do Sistema")
+        print("="*50)
+        
+        opcao = input("Escolha o modo de interação (1-7): ")
 
-    # ==================================================
-    # Demonstração das Funcionalidades Exigidas no Edital
-    # ==================================================
-    
-    # Teste da Árvore Trie (Modo Consulta Rápida por prefixo)
-    print("[TESTE TRIE] Buscando receitas que começam com 'Ch':")
-    resultados_trie = trie_nomes.buscar_por_prefixo("Ch")
-    for receita in resultados_trie:
-        print(f"  -> {receita.nome} ({receita.categoria})")
+        if opcao == "1":
+            prefixo = input("\nDigite as primeiras letras do prato (ex: Ch, Ba, Sal): ")
+            resultados = trie_nomes.buscar_por_prefixo(prefixo)
+            print(f"\n{len(resultados)} correspondencia(s) encontrada(s):")
+            for r in resultados:
+                print(f"  * {r.nome} ({r.categoria})")
 
-    print("-" * 50)
+        elif opcao == "2":
+            cat_busca = input("\nDigite a categoria desejada (ex: Beef, Chicken, Dessert, Pasta, Seafood): ")
+            resultados = trie_categorias.buscar_por_prefixo(cat_busca)
+            
+            if resultados:
+                print(f"\nForam encontradas {len(resultados)} receitas na categoria '{cat_busca}':")
+                print("-" * 50)
+                for r in resultados:
+                    print(f"  * {r.nome:<30} | Tempo: {r.tempo_preparo} min | Custo: R$ {r.custo:.2f}")
+                print("-" * 50)
+            else:
+                print(f"\nNenhuma receita encontrada para a categoria '{cat_busca}'.")
 
-    # Teste da Tabela Hash (Modo Investigação / Busca por ID em O(1))
-    print("[TESTE HASH] Buscando a receita de ID 52772 na nossa Tabela Hash:")
-    receita_hash = hash_ingredientes.buscar(52772)
-    if receita_hash:
-        print(f"  -> Encontrada: {receita_hash.nome} | Custo: R$ {receita_hash.custo}")
-    else:
-        print("  -> Receita não encontrada na tabela.")
+        elif opcao == "3":
+            # NOVA OPÇÃO: BUSCAR POR INGREDIENTE
+            ing_busca = input("\nDigite o ingrediente que deseja consultar (ex: garlic, sugar, chicken): ")
+            resultados = hash_sistema.buscar_por_ingrediente(ing_busca)
+            
+            if resultados:
+                print(f"\nForam encontradas {len(resultados)} receitas que utilizam '{ing_busca}':")
+                print("-" * 50)
+                for r in resultados:
+                    print(f"  * {r.nome:<30} | Categoria: {r.categoria}")
+                print("-" * 50)
+            else:
+                print(f"\nNenhuma receita encontrada contendo o ingrediente '{ing_busca}'.")
 
+        elif opcao == "4":
+            id_busca = input("\nDigite o ID numerico da receita (ex: 52772): ")
+            if id_busca.isdigit():
+                r = hash_sistema.buscar(int(id_busca))
+                if r:
+                    print(f"\nReceita Encontrada:\n  Nome: {r.nome}\n  Categoria: {r.categoria}\n  Custo: R$ {r.custo}\n  Tempo: {r.tempo_preparo} min\n  Ingredientes: {', '.join(r.ingredientes)}")
+                else:
+                    print("\nID não encontrado na Tabela Hash.")
+            else:
+                print("\nPor favor, digite um ID numerico valido.")
+
+        elif opcao == "5":
+            print("\nIniciando varredura de integridade de dados...")
+            sabotados = hash_sistema.investigar_sabotagens()
+            if not sabotados:
+                print("Tudo limpo! Nenhuma alteracao maldosa detectada.")
+                
+                simular = input("\nDeseja simular uma sabotagem para testar o sistema? (s/n): ")
+                if simular.lower() == 's':
+                    receita_alvo = hash_sistema.buscar(52772) 
+                    if receita_alvo:
+                        receita_alvo.ingredientes[0] = "oleo de motor" 
+                        print("Sabotagem injetada com sucesso no ID 52772! Rode a opcao 5 novamente.")
+            else:
+                print(f"ALERTA! DETECTAMOS {len(sabotados)} RECEITA(S) SABOTADA(S):")
+                for r in sabotados:
+                    print(f"  * PRATO VIOLADO: '{r.nome}' (ID: {r.id})")
+
+        elif opcao == "6":
+            try:
+                orcamento = float(input("\nQuanto eh o orcamento maximo para o Menu (R$)? "))
+                menu, custo_final = chef_guloso.gerar_menu_economico(orcamento)
+                print(f"\nSUGESTAO DO CHEF (Algoritmo Guloso - Maximizacao de Pratos):")
+                print(f"Conseguimos colocar {len(menu)} pratos no seu menu sem estourar o limite!")
+                for r in menu:
+                    print(f"  * {r.nome:<30} | Custo: R$ {r.custo:.2f}")
+                print(f"Total Utilizado: R$ {custo_final:.2f} / Limite: R$ {orcamento:.2f}")
+            except ValueError:
+                print("\nDigite um valor numerico valido para o orçamento.")
+
+        elif opcao == "7":
+            print("\nEncerrando o sistema. Ate logo, Chef!")
+            break
+        else:
+            print("\nOpcao invalida. Escolha de 1 a 7.")
+            
 if __name__ == "__main__":
     main()
