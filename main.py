@@ -149,15 +149,35 @@ def main():
         elif opcao == "6":
             try:
                 orcamento = float(input("\nQuanto eh o orcamento maximo para o Menu (R$)? "))
+                # 1. O algoritmo guloso escolhe os pratos que cabem no bolso
                 menu, custo_final = chef_guloso.gerar_menu_economico(orcamento)
-                print(f"\nSUGESTAO DO CHEF (Algoritmo Guloso - Maximizacao de Pratos):")
-                print(f"Conseguimos colocar {len(menu)} pratos no seu menu sem estourar o limite!")
-                for r in menu:
-                    print(f"  * {r.nome:<30} | Custo: R$ {r.custo:.2f}")
+               
+                # 2. Ordenação manual direta (Selection Sort) da maior para a pior avaliação
+                # Criamos uma cópia para não alterar a ordem original gerada pelo módulo do chef
+                menu_para_exibir = list(menu)
+                n = len(menu_para_exibir)
+               
+                for i in range(n):
+                    indice_maior = i
+                    for j in range(i + 1, n):
+                        # Se encontrarmos uma nota maior, atualizamos o índice
+                        if menu_para_exibir[j].avaliacao > menu_para_exibir[indice_maior].avaliacao:
+                            indice_maior = j
+                    # Troca os elementos de lugar (Swap)
+                    menu_para_exibir[i], menu_para_exibir[indice_maior] = menu_para_exibir[indice_maior], menu_para_exibir[i]
+               
+                print(f"\nSUGESTAO DO CHEF (Algoritmo Guloso - Exibido por Melhor Avaliacao):")
+                print(f"Conseguimos colocar {len(menu_para_exibir)} pratos no seu menu sem estourar o limite!")
+                print("-" * 65)
+               
+                # 3. Exibição dos resultados já ordenados na tela
+                for r in menu_para_exibir:
+                    print(f"  * {r.nome:<30} | Nota: {r.avaliacao} | Custo: R$ {r.custo:.2f}")
+                   
+                print("-" * 65)
                 print(f"Total Utilizado: R$ {custo_final:.2f} / Limite: R$ {orcamento:.2f}")
             except ValueError:
                 print("\nDigite um valor numerico valido para o orçamento.")
-
         elif opcao == "7":
             print("\nEncerrando o sistema. Ate logo, Chef!")
             break
