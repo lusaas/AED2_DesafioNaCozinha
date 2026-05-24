@@ -1,8 +1,11 @@
 import json
+import random
 from receita import Receita
+from receita import Ingredientes_adulterados
 from arvore_trie import ArvoreTrie
 from tabela_hash import TabelaHash
 from modo_chef import ModuloChef
+from arvore_patricia import ArvorePatricia
 
 def carregar_receitas_do_json(caminho_arquivo: str) -> list:
     """Lê o arquivo de backup local e transforma em objetos da classe Receita."""
@@ -79,10 +82,11 @@ def main():
         print("4. Modo Consulta: Buscar por ID (via HASH)")
         print("5. Modo Investigação: Varredura Anti-Sabotagem (via HASH)")
         print("6. Modo Chef: Algoritmo Guloso (Menu Econômico)")
-        print("7. Sair do Sistema")
+        print("7. [Desafio] Otimização de Memória: Compactar para Árvore Patrícia")
+        print("8. Sair do Sistema")
         print("="*50)
         
-        opcao = input("Escolha o modo de interação (1-7): ")
+        opcao = input("Escolha o modo de interação (1-8): ")
 
         if opcao == "1":
             prefixo = input("\nDigite as primeiras letras do prato (ex: Ch, Ba, Sal): ")
@@ -105,7 +109,6 @@ def main():
                 print(f"\nNenhuma receita encontrada para a categoria '{cat_busca}'.")
 
         elif opcao == "3":
-            # NOVA OPÇÃO: BUSCAR POR INGREDIENTE
             ing_busca = input("\nDigite o ingrediente que deseja consultar (ex: garlic, sugar, chicken): ")
             resultados = hash_sistema.buscar_por_ingrediente(ing_busca)
             
@@ -157,14 +160,12 @@ def main():
                 menu, custo_final = chef_guloso.gerar_menu_economico(orcamento)
                
                 # 2. Ordenação manual direta (Selection Sort) da maior para a pior avaliação
-                # Criamos uma cópia para não alterar a ordem original gerada pelo módulo do chef
                 menu_para_exibir = list(menu)
                 n = len(menu_para_exibir)
                
                 for i in range(n):
                     indice_maior = i
                     for j in range(i + 1, n):
-                        # Se encontrarmos uma nota maior, atualizamos o índice
                         if menu_para_exibir[j].avaliacao > menu_para_exibir[indice_maior].avaliacao:
                             indice_maior = j
                     # Troca os elementos de lugar (Swap)
@@ -182,11 +183,44 @@ def main():
                 print(f"Total Utilizado: R$ {custo_final:.2f} / Limite: R$ {orcamento:.2f}")
             except ValueError:
                 print("\nDigite um valor numerico valido para o orçamento.")
+                
+        # ==================================================
+        # NOVO BLOCO: OPÇÃO 7 (ÁRVORE PATRÍCIA)
+        # ==================================================
         elif opcao == "7":
+            print("\n" + "="*55)
+            print(f"{'DESAFIO: COMPRESSÃO DE CAMINHOS (ÁRVORE PATRÍCIA)':^55}")
+            print("="*55)
+            print("Instanciando a Árvore Patrícia a partir da Trie original de nomes...")
+            
+            # Passamos a trie_nomes (já carregada com dados) para ser comprimida
+            arvore_comprimida = ArvorePatricia(trie_nomes)
+            
+            # 1. Demonstração visual no ecrã
+            arvore_comprimida.imprimir_arvore()
+            
+            # 2. Prova de funcionamento da busca
+            print("\n" + "-"*55)
+            print(f"{'PROVA DE FUNCIONAMENTO (BUSCA POR PREFIXO)':^55}")
+            print("-"*55)
+            prefixo_teste = input("Digite um prefixo (ex: 'ba' para Bakewell, 'ch' para Chicken): ").strip()
+            
+            resultados = arvore_comprimida.buscar_por_prefixo(prefixo_teste)
+            
+            if resultados:
+                print(f"\n[Sucesso] Encontrada(s) {len(resultados)} receita(s) para o prefixo '{prefixo_teste}':")
+                for r in resultados:
+                    print(f" -> {r.nome} (Custo: R$ {r.custo:.2f})")
+            else:
+                print(f"\n[Aviso] Nenhuma receita encontrada com o prefixo '{prefixo_teste}'.")
+            print("="*55)
+
+        elif opcao == "8":
             print("\nEncerrando o sistema. Ate logo, Chef!")
             break
+            
         else:
-            print("\nOpcao invalida. Escolha de 1 a 7.")
+            print("\nOpcao invalida. Escolha de 1 a 8.")
 
 if __name__ == "__main__":
     main()
