@@ -13,7 +13,6 @@ O "Desafio na Cozinha" é uma aplicação de linha de comandos desenvolvida em P
 
 **Passo a passo:**
 1. Clone o repositório para a sua máquina local:
-   ```bash
    git clone [https://github.com/lusaas/AED2_DesafioNaCozinha.git](https://github.com/lusaas/AED2_DesafioNaCozinha.git)
 2.  Acesse à pasta do projeto: 
 
