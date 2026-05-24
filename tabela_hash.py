@@ -22,12 +22,12 @@ class TabelaHash:
         # Junta todas as informações cruciais em uma única string estável
         ingredientes_ordenados = sorted(receita.ingredientes)
         conteudo_bruto = f"{receita.nome}|{receita.categoria}|{receita.tempo_preparo}|{receita.custo}|{','.join(ingredientes_ordenados)}"
-        
+       
         # Algoritmo simples de hash de string (DJB2 adaptado) para gerar a assinatura sem imports externos
         hash_calculado = 5381
         for char in conteudo_bruto:
             hash_calculado = ((hash_calculado << 5) + hash_calculado) + ord(char)
-        
+       
         # Retorna em formato hexadecimal string fixa
         return hex(hash_calculado & 0xFFFFFFFF)
 
@@ -63,25 +63,6 @@ class TabelaHash:
             no_atual = no_atual.proximo
         return None
 
-    def buscar_por_ingrediente(self, nome_ingrediente: str) -> list:
-        """Percorre a tabela hash localizando receitas que utilizem o ingrediente informado."""
-        nome_ingrediente = nome_ingrediente.lower().strip()
-        resultados = []
-
-        # Varre o array da tabela hash
-        for indice in range(self.capacidade):
-            no_atual = self.tabela[indice]
-            
-            # Varre a lista encadeada para tratar colisões naquela posição
-            while no_atual:
-                receita = no_atual.valor
-                # Verifica se o ingrediente pesquisado está na lista de ingredientes da receita
-                if nome_ingrediente in receita.ingredientes:
-                    resultados.append(receita)
-                no_atual = no_atual.proximo
-
-        return resultados
-    
     # ==================================================
     # REQUISITO EXIGIDO: MODO INVESTIGAÇÃO (SABOTAGENS)
     # ==================================================
@@ -92,17 +73,17 @@ class TabelaHash:
         # Varre todas as posições do array da tabela
         for indice in range(self.capacidade):
             no_atual = self.tabela[indice]
-            
+           
             # Varre a lista encadeada daquela posição
             while no_atual:
                 receita = no_atual.valor
                 # Calcula a assinatura com o conteúdo ATUAL da memória
                 assinatura_atual = self.calcular_assinatura_receita(receita)
-                
+               
                 # Se o conteúdo atual divergir do carimbo original de inserção, houve sabotagem!
                 if assinatura_atual != receita.assinatura_original:
                     receitas_corrompidas.append(receita)
-                
+               
                 no_atual = no_atual.proximo
 
-        return receitas_corrompidas # Remove duplicados de referência se houver
+        return list(set(receitas_corrompidas)) # Remove duplicados de referência se houver
