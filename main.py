@@ -109,7 +109,7 @@ def main():
                 print(f"\nNenhuma receita encontrada para a categoria '{cat_busca}'.")
 
         elif opcao == "3":
-            ing_busca = input("\nDigite o ingrediente que deseja consultar (ex: garlic, sugar, chicken): ")
+            ing_busca = input("Digite o ingrediente para busca: ")
             resultados = hash_sistema.buscar_por_ingrediente(ing_busca)
             
             if resultados:

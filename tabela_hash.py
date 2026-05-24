@@ -62,7 +62,30 @@ class TabelaHash:
                 return no_atual.valor
             no_atual = no_atual.proximo
         return None
+    def buscar_por_ingrediente(self, ingrediente_busca: str) -> list:
+        """
+        Varre toda a tabela hash procurando por receitas que contenham 
+        o ingrediente especificado.
+        Complexidade de Tempo: O(n) devido à necessidade de varrer todos os nós.
+        """
+        resultados = []
+        # Normaliza o termo de busca para evitar problemas com maiúsculas/minúsculas
+        termo_limpo = ingrediente_busca.strip().lower()
 
+        # Percorre todas as posições do array da tabela
+        for indice in range(self.capacidade):
+            no_atual = self.tabela[indice]
+            
+            # Percorre a lista encadeada (tratamento de colisão) daquela posição
+            while no_atual:
+                receita = no_atual.valor
+                # Verifica se o ingrediente está na lista da receita
+                if termo_limpo in receita.ingredientes:
+                    resultados.append(receita)
+                
+                no_atual = no_atual.proximo
+
+        return resultados
     # ==================================================
     # REQUISITO EXIGIDO: MODO INVESTIGAÇÃO (SABOTAGENS)
     # ==================================================
