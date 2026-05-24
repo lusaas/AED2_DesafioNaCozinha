@@ -135,17 +135,21 @@ def main():
             if not sabotados:
                 print("Tudo limpo! Nenhuma alteracao maldosa detectada.")
                 
-                simular = input("\nDeseja simular uma sabotagem para testar o sistema? (s/n): ")
-                if simular.lower() == 's':
-                    receita_alvo = hash_sistema.buscar(52772) 
-                    if receita_alvo:
-                        receita_alvo.ingredientes[0] = "oleo de motor" 
-                        print("Sabotagem injetada com sucesso no ID 52772! Rode a opcao 5 novamente.")
             else:
                 print(f"ALERTA! DETECTAMOS {len(sabotados)} RECEITA(S) SABOTADA(S):")
                 for r in sabotados:
                     print(f"  * PRATO VIOLADO: '{r.nome}' (ID: {r.id})")
-
+            
+            simular = input("\nDeseja fazer uma sabotagem para testar o sistema? (s/n): ")
+            if simular.lower() == 's':
+                receita_aleatoria = random.choice(receitas_salvas)
+                id_aleatorio = receita_aleatoria.id
+                receita_alvo = hash_sistema.buscar(id_aleatorio) 
+                if receita_alvo:
+                    ingrediente_sabotado = random.choice(Ingredientes_adulterados)
+                    receita_alvo.ingredientes[0] = ingrediente_sabotado
+                    print("Sabotagem injetada com sucesso.")
+                    
         elif opcao == "6":
             try:
                 orcamento = float(input("\nQuanto eh o orcamento maximo para o Menu (R$)? "))
