@@ -5,7 +5,7 @@ class ModuloChef:
 
     def _merge_sort_custo(self, lista: list) -> list:
         if len(lista) <= 1:
-            return list(lista) # Copia a lista se tiver 1 elemento ou menos
+            return list(lista)
 
         meio = len(lista) // 2
         esquerda = self._merge_sort_custo(lista[:meio])
@@ -18,7 +18,6 @@ class ModuloChef:
         i = j = 0
 
         while i < len(esquerda) and j < len(direita):
-            # Critério de ordenação: Menor Custo Primeiro
             if esquerda[i].custo <= direita[j].custo:
                 resultado.append(esquerda[i])
                 i += 1
@@ -33,13 +32,11 @@ class ModuloChef:
     
     def gerar_menu_economico(self, orcamento_maximo: float) -> tuple:
         
-        # 1. Escolha Gulosa: Ordena manualmente todas as receitas pelo menor custo
         receitas_ordenadas = self._merge_sort_custo(self.receitas)
 
         menu_sugerido = []
         custo_total = 0.0
 
-        # 2. Passo Guloso: Vai pegando os itens mais baratos até o orçamento estourar
         for receita in receitas_ordenadas:
             if custo_total + receita.custo <= orcamento_maximo:
                 menu_sugerido.append(receita)

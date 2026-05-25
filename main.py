@@ -8,7 +8,6 @@ from modo_chef import ModuloChef
 from arvore_patricia import ArvorePatricia
 
 def carregar_receitas_do_json(caminho_arquivo: str) -> list:
-    """Lê o arquivo de backup local e transforma em objetos da classe Receita."""
     try:
         with open(caminho_arquivo, "r", encoding="utf-8") as f:
             dados_brutos = json.load(f)
@@ -17,7 +16,6 @@ def carregar_receitas_do_json(caminho_arquivo: str) -> list:
         for meal_data in dados_brutos:
             id_meal = meal_data["idMeal"]
             
-            # Semente fixa para simular custos e tempos estáveis por ID
             import random
             random.seed(int(id_meal))
             categoria = meal_data.get("strCategory", "").lower()
@@ -156,10 +154,8 @@ def main():
         elif opcao == "6":
             try:
                 orcamento = float(input("\nQuanto eh o orcamento maximo para o Menu (R$)? "))
-                # 1. O algoritmo guloso escolhe os pratos que cabem no bolso
                 menu, custo_final = chef_guloso.gerar_menu_economico(orcamento)
                
-                # 2. Ordenação manual direta (Selection Sort) da maior para a pior avaliação
                 menu_para_exibir = list(menu)
                 n = len(menu_para_exibir)
                
@@ -168,14 +164,12 @@ def main():
                     for j in range(i + 1, n):
                         if menu_para_exibir[j].avaliacao > menu_para_exibir[indice_maior].avaliacao:
                             indice_maior = j
-                    # Troca os elementos de lugar (Swap)
                     menu_para_exibir[i], menu_para_exibir[indice_maior] = menu_para_exibir[indice_maior], menu_para_exibir[i]
                
                 print(f"\nSUGESTAO DO CHEF (Algoritmo Guloso - Exibido por Melhor Avaliacao):")
                 print(f"Conseguimos colocar {len(menu_para_exibir)} pratos no seu menu sem estourar o limite!")
                 print("-" * 65)
                
-                # 3. Exibição dos resultados já ordenados na tela
                 for r in menu_para_exibir:
                     print(f"  * {r.nome:<30} | Nota: {r.avaliacao} | Custo: R$ {r.custo:.2f}")
                    
