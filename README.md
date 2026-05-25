@@ -66,3 +66,8 @@ Justificativa: O Merge Sort foi escolhido devido à sua complexidade de tempo fi
 Onde foi aplicado: Na função gerar_menu_economico dentro do "Modo Chef".
 
 Justificativa: O problema modelado consiste em tentar colocar o maior número possível de pratos distintos dentro de um orçamento financeiro máximo estipulado pelo utilizador. A estratégia gulosa faz escolhas ótimas locais (selecionar e consumir sempre a receita mais barata disponível no topo da lista ordenada) sem necessidade de retrocesso (backtracking). Para este formato específico de maximização de cardinalidade (quantidade de itens), a aproximação gulosa é matematicamente ótima, extremamente leve em termos computacionais e ideal para execução em tempo real na interface.
+
+# Observação:
+há dois txts para verificar as receitas, ids, igredientes e categorias dentro da pasta do trabalho
+    lista_id_receitas.txt
+    categorias_e_ingredientes.txt

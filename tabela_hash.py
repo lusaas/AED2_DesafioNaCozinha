@@ -1,5 +1,5 @@
 class NoHash:
-    """Nó de uma Lista Encadeada para tratar colisões na Tabela Hash."""
+    
     def __init__(self, chave: int, valor, proximo=None):
         self.chave = chave       # Será o ID da receita
         self.valor = valor       # Será o objeto da Receita
@@ -7,23 +7,21 @@ class NoHash:
 
 class TabelaHash:
     def __init__(self, capacidade: int = 23):
-        # Usamos um número primo para a capacidade inicial (ajuda a evitar colisões)
+        # número primo para a capacidade inicial (ajuda a evitar colisões)
         self.capacidade = capacidade
-        # Array de tamanho fixo inicializado com None (sem usar dict nativo)
         self.tabela = [None] * self.capacidade
         self.total_itens = 0
 
     def _funcao_hash(self, chave: int) -> int:
-        """Método da Divisão para calcular o índice na tabela."""
+        #Método da Divisão para calcular o índice na tabela.
         return chave % self.capacidade
 
     def calcular_assinatura_receita(self, receita) -> str:
-        """Gera um identificador único (checksum) baseado no conteúdo da receita."""
-        # Junta todas as informações cruciais em uma única string estável
+        #Gera um identificador único  baseado no conteúdo da receita.
         ingredientes_ordenados = sorted(receita.ingredientes)
         conteudo_bruto = f"{receita.nome}|{receita.categoria}|{receita.tempo_preparo}|{receita.custo}|{','.join(ingredientes_ordenados)}"
        
-        # Algoritmo simples de hash de string (DJB2 adaptado) para gerar a assinatura sem imports externos
+        # Algoritmo simples de hash de string  para gerar a assinatura sem imports externos
         hash_calculado = 5381
         for char in conteudo_bruto:
             hash_calculado = ((hash_calculado << 5) + hash_calculado) + ord(char)
@@ -32,8 +30,7 @@ class TabelaHash:
         return hex(hash_calculado & 0xFFFFFFFF)
 
     def inserir(self, chave: int, valor):
-        """Insere uma receita na tabela. Se o ID já existir, atualiza o valor."""
-        # Antes de guardar, carimbamos a assinatura de integridade original da receita
+        #Insere uma receita na tabela. Se o ID já existir, atualiza o valor.
         if not hasattr(valor, 'assinatura_original') or valor.assinatura_original is None:
             valor.assinatura_original = self.calcular_assinatura_receita(valor)
 
@@ -47,13 +44,13 @@ class TabelaHash:
                 return
             no_atual = no_atual.proximo
 
-        # Se não existia, insere no INÍCIO da lista encadeada (inserção em O(1))
+        # Se não existia, insere no INÍCIO da lista encadeada
         novo_no = NoHash(chave, valor, self.tabela[indice])
         self.tabela[indice] = novo_no
         self.total_itens += 1
 
     def buscar(self, chave: int):
-        """Busca uma receita pelo ID em tempo médio O(1)."""
+        #Busca uma receita pelo ID em tempo médio O(1).
         indice = self._funcao_hash(chave)
         no_atual = self.tabela[indice]
 
@@ -66,7 +63,6 @@ class TabelaHash:
         """
         Varre toda a tabela hash procurando por receitas que contenham 
         o ingrediente especificado.
-        Complexidade de Tempo: O(n) devido à necessidade de varrer todos os nós.
         """
         resultados = []
         # Normaliza o termo de busca para evitar problemas com maiúsculas/minúsculas
@@ -86,11 +82,11 @@ class TabelaHash:
                 no_atual = no_atual.proximo
 
         return resultados
-    # ==================================================
-    # REQUISITO EXIGIDO: MODO INVESTIGAÇÃO (SABOTAGENS)
-    # ==================================================
+    
+            # MODO INVESTIGAÇÃO (SABOTAGENS)
+    
     def investigar_sabotagens(self) -> list:
-        """Percorre toda a tabela verificando se alguma receita foi modificada ilegalmente."""
+        #Percorre toda a tabela verificando se alguma receita foi modificada ilegalmente.
         receitas_corrompidas = []
 
         # Varre todas as posições do array da tabela

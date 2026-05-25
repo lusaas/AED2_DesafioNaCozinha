@@ -6,10 +6,9 @@ class MealDBService:
     def __init__(self):
         self.base_url = "https://www.themealdb.com/api/json/v1/1/"
 
-    # MUDANÇA 1: Alterado o nome do método para bater com o que o main.py espera
+    
     def buscar_receita_por_id(self, id_meal: str):
-        """Busca a receita pelo seu ID estável e gera metadados fixos."""
-        # MUDANÇA 2: Alterado o endpoint para buscar por ID (lookup.php?i=)
+        
         url = f"{self.base_url}lookup.php?i={id_meal}"
 
         try:
@@ -22,7 +21,7 @@ class MealDBService:
             meal_data = dados["meals"][0]
             categoria = meal_data.get("strCategory", "").lower()
 
-            # Trava o random com o ID da receita para gerar valores fixos
+            
             random.seed(int(id_meal))
 
             if "dessert" in categoria:
@@ -36,7 +35,7 @@ class MealDBService:
                 custo = round(random.uniform(20.0, 50.0), 2)
 
             avaliacao = round(random.uniform(3.5, 5.0), 1)
-            random.seed(None)  # Reseta o gerador
+            random.seed(None)  
 
             # Coleta de ingredientes
             ingredientes = []
@@ -45,8 +44,7 @@ class MealDBService:
                 if ingrediente and ingrediente.strip():
                     ingredientes.append(ingrediente.strip().lower())
 
-            # MUDANÇA 3: O return foi movido para fora do loop 'for' (alinhado com ele)
-            # para que o Python leia todos os 20 ingredientes antes de criar a receita
+            
             return Receita(
                 id=int(id_meal),
                 nome=meal_data["strMeal"],

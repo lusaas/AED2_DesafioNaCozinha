@@ -4,7 +4,7 @@ import json
 def capturar_e_salvar_localmente():
     base_url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i="
     
-    # Os 50 IDs estáveis que selecionamos
+    
     ids_fixos = [
         "52767", "52768", "52769", "52770", "52772", "52773", "52774", "52775", "52776", "52777",
         "52824", "52826", "52874", "52875", "52878", "52994", "52995", "52996", "52997", "53000",

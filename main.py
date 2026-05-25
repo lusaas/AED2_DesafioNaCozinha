@@ -184,22 +184,16 @@ def main():
             except ValueError:
                 print("\nDigite um valor numerico valido para o orçamento.")
                 
-        # ==================================================
-        # NOVO BLOCO: OPÇÃO 7 (ÁRVORE PATRÍCIA)
-        # ==================================================
         elif opcao == "7":
             print("\n" + "="*55)
             print(f"{'DESAFIO: COMPRESSÃO DE CAMINHOS (ÁRVORE PATRÍCIA)':^55}")
             print("="*55)
             print("Instanciando a Árvore Patrícia a partir da Trie original de nomes...")
             
-            # Passamos a trie_nomes (já carregada com dados) para ser comprimida
             arvore_comprimida = ArvorePatricia(trie_nomes)
             
-            # 1. Demonstração visual no ecrã
             arvore_comprimida.imprimir_arvore()
             
-            # 2. Prova de funcionamento da busca
             print("\n" + "-"*55)
             print(f"{'PROVA DE FUNCIONAMENTO (BUSCA POR PREFIXO)':^55}")
             print("-"*55)

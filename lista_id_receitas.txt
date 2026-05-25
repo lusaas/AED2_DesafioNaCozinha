@@ -1,0 +1,56 @@
+==================================================
+        AED2_DesafioNaCozinha - MAPEAMENTO ID -> RECEITA
+==================================================
+
+ID: 52767  | Receita: Bakewell tart
+ID: 52768  | Receita: Apple Frangipan Tart
+ID: 52769  | Receita: Kapsalon
+ID: 52770  | Receita: Spaghetti Bolognese
+ID: 52772  | Receita: Teriyaki Chicken Casserole
+ID: 52773  | Receita: Honey Teriyaki Salmon
+ID: 52774  | Receita: Pad See Ew
+ID: 52775  | Receita: Vegan Lasagna
+ID: 52776  | Receita: Chocolate Gateau
+ID: 52777  | Receita: Mediterranean Pasta Salad
+ID: 52824  | Receita: Beef Sunday Roast
+ID: 52826  | Receita: Braised Beef Chilli
+ID: 52874  | Receita: Beef and Mustard Pie
+ID: 52875  | Receita: Chicken Ham and Leek Pie
+ID: 52878  | Receita: Beef and Oyster pie
+ID: 52994  | Receita: Skillet Apple Pork Chops with Roasted Sweet Potatoes & Zucchini
+ID: 52995  | Receita: BBQ Pork Sloppy Joes
+ID: 52996  | Receita: French Onion Chicken with Roasted Carrots & Mashed Potatoes
+ID: 52997  | Receita: Beef Banh Mi Bowls with Sriracha Mayo, Carrot & Pickled Cucumber
+ID: 53000  | Receita: Vegetable Shepherds Pie
+ID: 52795  | Receita: Chicken Handi
+ID: 52796  | Receita: Chicken Alfredo Primavera
+ID: 52818  | Receita: Chicken Fajita Mac and Cheese
+ID: 52819  | Receita: Cajun spiced fish tacos
+ID: 52820  | Receita: Katsu Chicken curry
+ID: 52846  | Receita: Chicken & mushroom Hotpot
+ID: 52850  | Receita: Chicken Couscous
+ID: 52879  | Receita: Chicken Parmentier
+ID: 52934  | Receita: Chicken Basquaise
+ID: 52940  | Receita: Brown Stew Chicken
+ID: 52771  | Receita: Spicy Arrabiata Penne
+ID: 52802  | Receita: Fish pie
+ID: 52821  | Receita: Laksa King Prawn Noodles
+ID: 52836  | Receita: Seafood fideuà
+ID: 52859  | Receita: Key Lime Pie
+ID: 52882  | Receita: Three Fish Pie
+ID: 52918  | Receita: Fish Stew with Rouille
+ID: 52944  | Receita: Escovitch Fish
+ID: 52953  | Receita: Shrimp Chow Fun
+ID: 52959  | Receita: Baked salmon with fennel & tomatoes
+ID: 52779  | Receita: Cream Cheese Tart
+ID: 52780  | Receita: Potato Gratin with Chicken
+ID: 52811  | Receita: Ribollita
+ID: 52844  | Receita: Lasagne
+ID: 52848  | Receita: Bean & Sausage Hotpot
+ID: 52893  | Receita: Apple & Blackberry Crumble
+ID: 52906  | Receita: Flamiche
+ID: 52929  | Receita: Timbits
+ID: 52955  | Receita: Egg Drop Soup
+ID: 52971  | Receita: Kafteji
+
+Total de mapeamentos gerados: 50 receitas.

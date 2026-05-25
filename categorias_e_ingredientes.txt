@@ -1,0 +1,224 @@
+=========================================================
+    AED2_DesafioNaCozinha - CATEGORIAS E INGREDIENTES
+=========================================================
+
+ CATEGORIAS DISPONÍVEIS NO SISTEMA:
+   -> Beef
+   -> Chicken
+   -> Dessert
+   -> Lamb
+   -> Miscellaneous
+   -> Pasta
+   -> Pork
+   -> Seafood
+   -> Starter
+   -> Vegan
+   -> Vegetarian
+
+=========================================================
+
+ LISTA DE RECEITAS, CATEGORIAS E SEUS INGREDIENTES:
+=========================================================
+
+Receita: Bakewell tart
+Categoria: Dessert
+Ingredientes (10): Plain Flour, Chilled Butter, Cold Water, Raspberry Jam, Butter, Caster Sugar, Ground Almonds, Free-Range Egg, Beaten, Almond Extract, Flaked Almonds
+---------------------------------------------------------
+Receita: Apple Frangipan Tart
+Categoria: Dessert
+Ingredientes (9): Digestive Biscuits, Butter, Bramley Apples, Salted Butter, Caster Sugar, Free-Range Eggs, Beaten, Ground Almonds, Almond Extract, Flaked Almonds
+---------------------------------------------------------
+Receita: Kapsalon
+Categoria: Lamb
+Ingredientes (8): Fries, Doner Meat, Garlic Sauce, Hotsauce, Lettuce, Tomato, Cucumber, Gouda Cheese
+---------------------------------------------------------
+Receita: Spaghetti Bolognese
+Categoria: Beef
+Ingredientes (12): Onions, Olive Oil, Garlic, Lean Minced Beef, Mushrooms, Dried Oregano, Tomatoes, Hot Beef Stock, Tomato Puree, Worcestershire Sauce, Spaghetti, Parmesan
+---------------------------------------------------------
+Receita: Teriyaki Chicken Casserole
+Categoria: Chicken
+Ingredientes (9): Soy Sauce, Water, Brown Sugar, Ground Ginger, Minced Garlic, Cornstarch, Chicken Breasts, Stir-Fry Vegetables, Brown Rice
+---------------------------------------------------------
+Receita: Honey Teriyaki Salmon
+Categoria: Seafood
+Ingredientes (5): Salmon, Olive Oil, Soy Sauce, Sake, Sesame Seed
+---------------------------------------------------------
+Receita: Pad See Ew
+Categoria: Chicken
+Ingredientes (12): Rice Stick Noodles, Dark Soy Sauce, Oyster Sauce, Soy Sauce, White Vinegar, Sugar, Water, Peanut Oil, Garlic, Chicken, Egg, Chinese Broccoli
+---------------------------------------------------------
+Receita: Vegan Lasagna
+Categoria: Vegan
+Ingredientes (12): Green Red Lentils, Carrots, Onion, Zucchini, Coriander, Spinach, Lasagne Sheets, Vegan Butter, Flour, Soya Milk, Mustard, Vinegar
+---------------------------------------------------------
+Receita: Chocolate Gateau
+Categoria: Dessert
+Ingredientes (6): Plain Chocolate, Butter, Milk, Eggs, Granulated Sugar, Flour
+---------------------------------------------------------
+Receita: Mediterranean Pasta Salad
+Categoria: Seafood
+Ingredientes (9): Mozzarella Balls, Baby Plum Tomatoes, Fresh Basil, Farfalle, Extra Virgin Olive Oil, Green Olives, Tuna, Salt, Pepper
+---------------------------------------------------------
+Receita: Beef Sunday Roast
+Categoria: Beef
+Ingredientes (8): Beef, Broccoli, Potatoes, Carrots, Plain Flour, Eggs, Milk, Sunflower Oil
+---------------------------------------------------------
+Receita: Braised Beef Chilli
+Categoria: Beef
+Ingredientes (17): Beef, Onions, Garlic, Olive Oil, Chorizo, Cumin, Allspice, Cloves, Cinnamon Stick, Bay Leaves, Oregano, Ancho Chillies, Balsamic Vinegar, Plum Tomatoes, Tomato Ketchup, Dark Brown Sugar, Borlotti Beans
+---------------------------------------------------------
+Receita: Beef and Mustard Pie
+Categoria: Beef
+Ingredientes (15): Beef, Plain Flour, Rapeseed Oil, Red Wine, Beef Stock, Onion, Carrots, Thyme, Mustard, Egg Yolks, Puff Pastry, Green Beans, Butter, Salt, Pepper
+---------------------------------------------------------
+Receita: Chicken Ham and Leek Pie
+Categoria: Chicken
+Ingredientes (17): Chicken Stock, Chicken Breast, Butter, Leek, Garlic, Plain Flour, Milk, White Wine, Double Cream, Ham, Sea Salt, Pepper, Plain Flour, Butter, Free-Range Egg, Beaten, Cold Water, Free-Range Egg, Beaten
+---------------------------------------------------------
+Receita: Beef and Oyster pie
+Categoria: Beef
+Ingredientes (15): Beef, Olive Oil, Shallots, Garlic, Bacon, Thyme, Bay Leaf, Stout, Beef Stock, Corn Flour, Oysters, Plain Flour, Salt, Butter, Eggs
+---------------------------------------------------------
+Receita: Skillet Apple Pork Chops with Roasted Sweet Potatoes & Zucchini
+Categoria: Pork
+Ingredientes (10): Potatoes, Apples, Garlic, Lemon, Pork, Zucchini, Chicken Stock, Vegetable Oil, Sugar, Butter
+---------------------------------------------------------
+Receita: BBQ Pork Sloppy Joes
+Categoria: Pork
+Ingredientes (13): Potatoes, Red Onions, Garlic, Lime, Bread, Pork, Barbeque Sauce, Hotsauce, Tomato Ketchup, Sugar, Vegetable Oil, Salt, Pepper
+---------------------------------------------------------
+Receita: French Onion Chicken with Roasted Carrots & Mashed Potatoes
+Categoria: Chicken
+Ingredientes (12): Chicken Breasts, Carrots, Potatoes, Onion, Beef Stock, Mozzarella, Sour Cream, Butter, Sugar, Vegetable Oil, Salt, Pepper
+---------------------------------------------------------
+Receita: Beef Banh Mi Bowls with Sriracha Mayo, Carrot & Pickled Cucumber
+Categoria: Beef
+Ingredientes (8): Rice, Onion, Lime, Garlic Clove, Cucumber, Carrots, Ground Beef, Soy Sauce
+---------------------------------------------------------
+Receita: Vegetable Shepherds Pie
+Categoria: Beef
+Ingredientes (19): Potatoes, Small Potatoes, Salted Butter, Mushrooms, Brown Lentils, Garlic, Kosher Salt, Onion, Tomato Puree, Bay Leaves, Olive Oil, Dry White Wine, Vegetable Stock, Cornstarch, Soy Sauce, Rosemary, Parsley, Sage, Chives
+---------------------------------------------------------
+Receita: Chicken Handi
+Categoria: Chicken
+Ingredientes (16): Chicken, Onion, Tomatoes, Garlic, Ginger Paste, Vegetable Oil, Cumin Seeds, Coriander Seeds, Turmeric Powder, Chilli Powder, Green Chilli, Yogurt, Cream, Fenugreek, Garam Masala, Salt
+---------------------------------------------------------
+Receita: Chicken Alfredo Primavera
+Categoria: Chicken
+Ingredientes (19): Butter, Olive Oil, Chicken, Salt, Squash, Broccoli, Mushrooms, Pepper, Onion, Garlic, Red Pepper Flakes, White Wine, Milk, Heavy Cream, Parmesan Cheese, Bowtie Pasta, Salt, Pepper, Parsley
+---------------------------------------------------------
+Receita: Chicken Fajita Mac and Cheese
+Categoria: Chicken
+Ingredientes (12): Macaroni, Chicken Stock, Heavy Cream, Fajita Seasoning, Salt, Chicken Breast, Olive Oil, Onion, Red Pepper, Garlic, Cheddar Cheese, Parsley
+---------------------------------------------------------
+Receita: Cajun spiced fish tacos
+Categoria: Seafood
+Ingredientes (12): Cajun, Cayenne Pepper, White Fish, Vegetable Oil, Flour Tortilla, Avocado, Little Gem Lettuce, Spring Onions, Salsa, Sour Cream, Lemon, Garlic
+---------------------------------------------------------
+Receita: Katsu Chicken curry
+Categoria: Chicken
+Ingredientes (16): Chicken Breast, Plain Flour, Egg, Breadcrumbs, Vegetable Oil, Sunflower Oil, Onions, Garlic, Carrot, Plain Flour, Curry Powder, Chicken Stock, Honey, Soy Sauce, Bay Leaf, Garam Masala
+---------------------------------------------------------
+Receita: Chicken & mushroom Hotpot
+Categoria: Chicken
+Ingredientes (11): Butter, Onion, Mushrooms, Plain Flour, Chicken Stock Cube, Nutmeg, Mustard Powder, Chicken, Sweetcorn, Potatoes, Butter
+---------------------------------------------------------
+Receita: Chicken Couscous
+Categoria: Chicken
+Ingredientes (10): Olive Oil, Onion, Chicken Breast, Ginger, Harissa Spice, Dried Apricots, Chickpeas, Couscous, Chicken Stock, Coriander
+---------------------------------------------------------
+Receita: Chicken Parmentier
+Categoria: Chicken
+Ingredientes (17): Potatoes, Butter, Double Cream, Egg Yolks, Butter, Shallots, Carrots, Celery, Garlic Clove, White Wine, Tomato Puree, Tinned Tomatos, Chicken Stock, Chicken, Black Olives, Parsley, Gruyere Cheese
+---------------------------------------------------------
+Receita: Chicken Basquaise
+Categoria: Chicken
+Ingredientes (19): Chicken, Butter, Olive Oil, Red Onions, Red Pepper, Chorizo, Sun-Dried Tomatoes, Garlic, Basmati Rice, Tomato Puree, Paprika, Bay Leaves, Thyme, Chicken Stock, Dry White Wine, Lemons, Black Olives, Salt, Pepper
+---------------------------------------------------------
+Receita: Brown Stew Chicken
+Categoria: Chicken
+Ingredientes (13): Chicken, Tomato, Onions, Garlic Clove, Red Pepper, Carrots, Lime, Thyme, Allspice, Soy Sauce, Cornstarch, Coconut Milk, Vegetable Oil
+---------------------------------------------------------
+Receita: Spicy Arrabiata Penne
+Categoria: Vegetarian
+Ingredientes (8): Penne Rigate, Olive Oil, Garlic, Chopped Tomatoes, Red Chilli Flakes, Italian Seasoning, Basil, Parmigiano-Reggiano
+---------------------------------------------------------
+Receita: Fish pie
+Categoria: Seafood
+Ingredientes (15): Floury Potatoes, Olive Oil, Semi-Skimmed Milk, White Fish Fillets, Plain Flour, Nutmeg, Double Cream, Jerusalem Artichokes, Leek, Prawns, Parsley, Dill, Lemon, Gruyère, Lemon
+---------------------------------------------------------
+Receita: Laksa King Prawn Noodles
+Categoria: Seafood
+Ingredientes (10): Olive Oil, Red Chilli, Thai Red Curry Paste, Vegetable Stock Cube, Coconut Milk, Fish Sauce, Rice Noodles, Lime, King Prawns, Coriander
+---------------------------------------------------------
+Receita: Seafood fideuà
+Categoria: Seafood
+Ingredientes (14): Mussels, Prawns, Saffron, Vermicelli Pasta, Olive Oil, Onions, Garlic, Paprika, Monkfish, Baby Squid, Fish Stock, Tomatoes, Lemon, Parsley
+---------------------------------------------------------
+Receita: Key Lime Pie
+Categoria: Dessert
+Ingredientes (8): Digestive Biscuits, Butter, Condensed Milk, Egg Yolks, Lime, Double Cream, Icing Sugar, Lime
+---------------------------------------------------------
+Receita: Three Fish Pie
+Categoria: Seafood
+Ingredientes (14): Potatoes, Butter, Milk, Gruyere, Butter, Leek, Plain Flour, White Wine, Milk, Parsley, Salmon, Haddock, Smoked Haddock, Eggs
+---------------------------------------------------------
+Receita: Fish Stew with Rouille
+Categoria: Seafood
+Ingredientes (18): Prawns, Olive Oil, Dry White Wine, Fish Stock, Fennel, Onion, Garlic, Potatoes, Orange, Star Anise, Bay Leaf, Harissa Spice, Tomato Puree, Chopped Tomatoes, Mussels, White Fish, Thyme, Bread
+---------------------------------------------------------
+Receita: Escovitch Fish
+Categoria: Seafood
+Ingredientes (17): Red Snapper, Vegetable Oil, Garlic, Ginger, Thyme, Bay Leaf, Red Pepper, Yellow Pepper, Onion, Carrots, Sugar, Allspice, Worcestershire Sauce, Scotch Bonnet, Lime, Malt Vinegar, Pepper
+---------------------------------------------------------
+Receita: Shrimp Chow Fun
+Categoria: Seafood
+Ingredientes (17): Rice Stick Noodles, Prawns, Egg, Pepper, Sesame Seed Oil, Cornstarch, Oil, Minced Garlic, Ginger, Onion, Bean Sprouts, Spring Onions, Cooking Wine, Oyster Sauce, Sugar, Vinegar, Soy Sauce
+---------------------------------------------------------
+Receita: Baked salmon with fennel & tomatoes
+Categoria: Seafood
+Ingredientes (7): Fennel, Parsley, Lemon, Cherry Tomatoes, Olive Oil, Salmon, Black Olives
+---------------------------------------------------------
+Receita: Cream Cheese Tart
+Categoria: Starter
+Ingredientes (12): Flour, Butter, Egg, Salt, Cheese, Milk, Eggs, Parmesan Cheese, Plum Tomatoes, White Vinegar, Honey, Basil
+---------------------------------------------------------
+Receita: Potato Gratin with Chicken
+Categoria: Chicken
+Ingredientes (10): Potatoes, Onions, Olive Oil, Chicken Stock, Creme Fraiche, Parmesan, Chicken Breasts, Bacon, Spinach, Peas
+---------------------------------------------------------
+Receita: Ribollita
+Categoria: Vegetarian
+Ingredientes (14): Olive Oil, Onion, Carrots, Celery, Garlic, Cannellini Beans, Canned Tomatoes, Water, Rosemary, Thyme, Kale, Wholegrain Bread, Red Onions, Parmesan
+---------------------------------------------------------
+Receita: Lasagne
+Categoria: Pasta
+Ingredientes (15): Olive Oil, Bacon, Onion, Celery, Carrots, Garlic, Minced Beef, Tomato Puree, Chopped Tomatoes, Honey, Lasagne Sheets, Creme Fraiche, Mozzarella Balls, Parmesan Cheese, Basil Leaves
+---------------------------------------------------------
+Receita: Bean & Sausage Hotpot
+Categoria: Miscellaneous
+Ingredientes (5): Sausages, Tomato Sauce, Butter Beans, Black Treacle, English Mustard
+---------------------------------------------------------
+Receita: Apple & Blackberry Crumble
+Categoria: Dessert
+Ingredientes (9): Plain Flour, Caster Sugar, Butter, Braeburn Apples, Butter, Demerara Sugar, Blackberries, Cinnamon, Ice Cream
+---------------------------------------------------------
+Receita: Flamiche
+Categoria: Vegetarian
+Ingredientes (13): Butter, Leek, Salt, Creme Fraiche, Egg, Egg Yolks, Nutmeg, Plain Flour, Salt, Butter, Lard, Cheddar Cheese, Water
+---------------------------------------------------------
+Receita: Timbits
+Categoria: Dessert
+Ingredientes (9): Flour, Sugar, Baking Powder, Salt, Egg, Milk, Oil, Oil, Icing Sugar
+---------------------------------------------------------
+Receita: Egg Drop Soup
+Categoria: Vegetarian
+Ingredientes (10): Chicken Stock, Salt, Sugar, Pepper, Sesame Seed Oil, Peas, Mushrooms, Cornstarch, Water, Spring Onions
+---------------------------------------------------------
+Receita: Kafteji
+Categoria: Vegetarian
+Ingredientes (9): Potatoes, Olive Oil, Green Pepper, Onions, Ras El Hanout, Pumpkin, Eggs, Salt, Pepper
+---------------------------------------------------------
+
+Total de receitas processadas: 50.

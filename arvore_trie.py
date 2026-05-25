@@ -13,14 +13,11 @@ class ArvoreTrie:
         self.raiz = NoTrie()
 
     def _char_para_indice(self, char: str) -> int:
-        """Função auxiliar para converter letras 'a'-'z' em índices 0-25."""
-        # Usamos ord() para pegar o valor ASCII do caractere.
-        # Exemplo: ord('a') - ord('a') = 0 | ord('b') - ord('a') = 1
+        
         return ord(char) - ord('a')
 
     def _normalizar_string(self, texto: str) -> str:
-        """Remove espaços e caracteres especiais básicos para indexação na Trie."""
-        # Mantém apenas as letras de 'a' a 'z' em minúsculo
+       
         texto_limpo = ""
         for char in texto.lower():
             if 'a' <= char <= 'z':
@@ -42,12 +39,11 @@ class ArvoreTrie:
             # Caminha para o nó filho
             no_atual = no_atual.filhos[indice]
 
-        # Ao terminar a palavra, marcamos o fim e guardamos o objeto da Receita lá
         no_atual.fim_da_palavra = True
         no_atual.receitas.append(receita_objeto)
 
     def buscar_por_prefixo(self, prefixo: str) -> list:
-        """Busca e retorna todas as receitas que começam com o prefixo digitado."""
+       
         prefixo_limpo = self._normalizar_string(prefixo)
         no_atual = self.raiz
 
@@ -64,7 +60,7 @@ class ArvoreTrie:
         return resultados
 
     def _coletar_todas_da_subarvore(self, no_atual: NoTrie, resultados: list):
-        """Método recursivo (DFS) para varrer a subárvore acumulando as receitas."""
+        
         if no_atual.fim_da_palavra:
             resultados.extend(no_atual.receitas)
 
