@@ -33,7 +33,7 @@ class TabelaHash:
 
         while no_atual:
             if no_atual.chave == chave:
-                no_atual.valor = valor # Atualiza se já existir
+                no_atual.valor = valor
                 return
             no_atual = no_atual.proximo
 

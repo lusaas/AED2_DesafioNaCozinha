@@ -16,7 +16,6 @@ def carregar_receitas_do_json(caminho_arquivo: str) -> list:
         for meal_data in dados_brutos:
             id_meal = meal_data["idMeal"]
             
-            import random
             random.seed(int(id_meal))
             categoria = meal_data.get("strCategory", "").lower()
             

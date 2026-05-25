@@ -1,6 +1,5 @@
 class ModuloChef:
     def __init__(self, lista_receitas: list):
-        # Recebe a lista de receitas carregadas no sistema
         self.receitas = lista_receitas
 
     def _merge_sort_custo(self, lista: list) -> list:
