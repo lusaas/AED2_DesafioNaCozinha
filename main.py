@@ -80,10 +80,14 @@ def main():
         print("5. Modo Investigação: Varredura Anti-Sabotagem (via HASH)")
         print("6. Modo Chef: Algoritmo Guloso (Menu Econômico)")
         print("7. [Desafio] Otimização de Memória: Compactar para Árvore Patrícia")
-        print("8. Sair do Sistema")
+        print("8. Oficina de Produção")
+        print("9. Menu VIP")
+        print("10. Desafio Logístico")
+        print("11. Sistema de Entregas")
+        print("12. Sair do Sistema")
         print("="*50)
         
-        opcao = input("Escolha o modo de interação (1-8): ")
+        opcao = input("Escolha o modo de interação: ")
 
         if opcao == "1":
             prefixo = input("\nDigite as primeiras letras do prato (ex: Ch, Ba, Sal): ")
@@ -202,7 +206,34 @@ def main():
                 print(f"\n[Aviso] Nenhuma receita encontrada com o prefixo '{prefixo_teste}'.")
             print("="*55)
 
-        elif opcao == "8":
+
+        elif opcao == 8:
+            while True:
+                print("\n" + "="*50)
+                print(f"{'OFICINA DE PRODUÇÃO':^50}")
+                print("="*50)
+                print("1. Cadastrar Dependências")
+                print("2. Verificar Sequência Viável")
+                print("3. Identificar Inconsistências")
+                print("4. Ver Ordem Válida")
+                print("5. Voltar")
+                print("="*50)
+
+                opcao = int(input("Digite a opção: "))
+                
+                if opcao == 1:
+                    pass
+
+        elif opcao == 9:
+            pass
+
+        elif opcao == 10:
+            pass
+
+        elif opcao == 11:
+            pass
+
+        elif opcao == "12":
             print("\nEncerrando o sistema. Ate logo, Chef!")
             break
             
