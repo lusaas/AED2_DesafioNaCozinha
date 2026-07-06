@@ -6,6 +6,7 @@ from arvore_trie import ArvoreTrie
 from tabela_hash import TabelaHash
 from modo_chef import ModuloChef
 from arvore_patricia import ArvorePatricia
+from dependencia import Grafo
 
 def carregar_receitas_do_json(caminho_arquivo: str) -> list:
     try:
@@ -63,6 +64,7 @@ def main():
     trie_categorias = ArvoreTrie()  
     hash_sistema = TabelaHash() 
     chef_guloso = ModuloChef(receitas_salvas)
+    dependencias = Grafo()
 
     for r in receitas_salvas:
         trie_nomes.inserir(r.nome, r)
@@ -222,6 +224,14 @@ def main():
                 opcao = int(input("Digite a opção: "))
                 
                 if opcao == 1:
+                    origem = int(input("Digite o ID da receita de ORIGEM da dependência: "))
+                    destino = int(input("Digite o ID da receita de DESTINO da dependência: "))
+
+                    dependencia = dependencias.adiciona(origem, destino)
+
+                    print(f"Foi adicionado a dependência entre '{origem}' -> '{destino}'\n")
+                elif opcao == 2:
+                    resultado = dependencias.imprime_grafo()
                     pass
 
         elif opcao == 9:
