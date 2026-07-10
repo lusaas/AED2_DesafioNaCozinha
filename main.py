@@ -209,7 +209,7 @@ def main():
             print("="*55)
 
 
-        elif opcao == 8:
+        elif opcao == "8":
             while True:
                 print("\n" + "="*50)
                 print(f"{'OFICINA DE PRODUÇÃO':^50}")
@@ -227,20 +227,29 @@ def main():
                     origem = int(input("Digite o ID da receita de ORIGEM da dependência: "))
                     destino = int(input("Digite o ID da receita de DESTINO da dependência: "))
 
-                    dependencia = dependencias.adiciona(origem, destino)
+                    dependencias.adiciona(origem, destino)
 
                     print(f"Foi adicionado a dependência entre '{origem}' -> '{destino}'\n")
+                
                 elif opcao == 2:
-                    resultado = dependencias.imprime_grafo()
-                    pass
+                    dependencias.imprime_grafo(hash_sistema)
 
-        elif opcao == 9:
+                elif opcao == 3:
+                    dependencias.identificar_inconsistencias(hash_sistema)
+
+                elif opcao == 4:
+                    dependencias.ordenar(hash_sistema)
+
+                elif opcao == 5:
+                    break
+
+        elif opcao == "9":
             pass
 
-        elif opcao == 10:
+        elif opcao == "10":
             pass
 
-        elif opcao == 11:
+        elif opcao == "11":
             pass
 
         elif opcao == "12":
