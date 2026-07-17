@@ -83,3 +83,15 @@ class TabelaHash:
                 no_atual = no_atual.proximo
 
         return list(set(receitas_corrompidas))
+    
+    def obter_todas_receitas(self) -> list:
+        todas = []
+        
+        for i in range(self.capacidade):
+            no_atual = self.tabela[i]
+            
+            while no_atual is not None:
+                todas.append(no_atual.valor)
+                no_atual = no_atual.proximo
+                
+        return todas

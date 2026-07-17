@@ -7,6 +7,7 @@ from tabela_hash import TabelaHash
 from modo_chef import ModuloChef
 from arvore_patricia import ArvorePatricia
 from dependencia import Grafo
+from menu_vip import MenuVip
 
 def carregar_receitas_do_json(caminho_arquivo: str) -> list:
     try:
@@ -54,9 +55,25 @@ def carregar_receitas_do_json(caminho_arquivo: str) -> list:
     except FileNotFoundError:
         print(f"Erro: Arquivo '{caminho_arquivo}' não encontrado. Execute 'capturar_dados.py' primeiro!")
         return []
+    
+def carregar_estoque(caminho_arquivo: str) -> dict:
+    try:
+        with open(caminho_arquivo, "r", encoding="utf-8") as f:
+            dados_brutos = json.load(f)
+        
+        estoque = dados_brutos.get("ingredientes", {})
+        return estoque
+    
+    except FileNotFoundError:
+        print(f"ERRO: Arquivo de estoque '{caminho_arquivo}' não foi encontrado.")
+        return {}
+    except json.JSONDecodeError:
+        print(f"ERRO: Falha ao decodificar o arquivo JSON.")
+        return {}
 
 def main():
     receitas_salvas = carregar_receitas_do_json("receitas_locais.json")
+    ingredientes_estoque = carregar_estoque("estoque1.json")
     if not receitas_salvas:
         return
 
@@ -65,6 +82,7 @@ def main():
     hash_sistema = TabelaHash() 
     chef_guloso = ModuloChef(receitas_salvas)
     dependencias = Grafo()
+    menu_vip = MenuVip()
 
     for r in receitas_salvas:
         trie_nomes.inserir(r.nome, r)
@@ -244,7 +262,28 @@ def main():
                     break
 
         elif opcao == "9":
-            pass
+            while True:
+                print("\n" + "="*50)
+                print(f"{'MENU VIP':^50}")
+                print("="*50)
+                print("1. Buscar Receitas por Ingredientes Disponíveis")
+                print("2. Sugerir Menu de Maior Lucro")
+                print("3. Voltar")
+                print("="*50)
+
+                opcao = int(input("Digite a opção: "))
+                
+                if opcao == 1:
+                    ingrediente1 = input("Digite o nome do ingrediente 1: ").strip()
+                    ingrediente2 = input("Digite o nome do ingrediente 2: ").strip()
+                    
+                    menu_vip.busca(ingrediente1, ingrediente2, ingredientes_estoque, hash_sistema)
+                    
+                elif opcao == 2:
+                    menu_vip.maior_lucro(ingredientes_estoque, hash_sistema)
+
+                elif opcao == 3:
+                    break
 
         elif opcao == "10":
             pass
