@@ -8,6 +8,8 @@ from modo_chef import ModuloChef
 from arvore_patricia import ArvorePatricia
 from dependencia import Grafo
 from menu_vip import MenuVip
+from sistema_logistica import GrafoLogistica
+from laboratorio_chef import LaboratorioChef
 
 def carregar_receitas_do_json(caminho_arquivo: str) -> list:
     try:
@@ -70,6 +72,50 @@ def carregar_estoque(caminho_arquivo: str) -> dict:
     except json.JSONDecodeError:
         print(f"ERRO: Falha ao decodificar o arquivo JSON.")
         return {}
+    
+def inicializar_cenario_logistica(hash_sistema, estoque) -> GrafoLogistica:
+    grafo_log = GrafoLogistica()
+    
+    # 1. Cadastrando os pontos operacionais (Vértices)
+    # Cozinhas de Preparo (Fontes de Produção)
+    grafo_log.adicionar_vertice("Cozinha_Central", "cozinha", capacidade=30)
+    grafo_log.adicionar_vertice("Estacao_Auxiliar_Norte", "cozinha", capacidade=15)
+    
+    # Pontos de Retirada (Hubs)
+    grafo_log.adicionar_vertice("Hub_Centro", "hub")
+    grafo_log.adicionar_vertice("Hub_Leste", "hub")
+    
+    # Regiões de Entrega (Destinos Finais)
+    grafo_log.adicionar_vertice("Zona_Sul", "regiao")
+    grafo_log.adicionar_vertice("Zona_Norte", "regiao")
+    grafo_log.adicionar_vertice("Zona_Oeste", "regiao")
+
+    # 2. Conectando a infraestrutura física (Arestas)
+    # formato: adicionar_conexao(origem, destino, tempo_minutos, capacidade_pedidos)
+    grafo_log.adicionar_conexao("Cozinha_Central", "Hub_Centro", tempo=8.0, capacidade=25)
+    grafo_log.adicionar_conexao("Cozinha_Central", "Hub_Leste", tempo=15.0, capacidade=12)
+    grafo_log.adicionar_conexao("Estacao_Auxiliar_Norte", "Hub_Centro", tempo=12.0, capacidade=10)
+    
+    # Conexões Hub -> Regiões de Entrega
+    grafo_log.adicionar_conexao("Hub_Centro", "Zona_Sul", tempo=10.0, capacidade=15)
+    grafo_log.adicionar_conexao("Hub_Centro", "Zona_Norte", tempo=14.0, capacidade=8)
+    grafo_log.adicionar_conexao("Hub_Leste", "Zona_Norte", tempo=9.0, capacidade=10)
+    grafo_log.adicionar_conexao("Hub_Leste", "Zona_Oeste", tempo=18.0, capacidade=15)
+    
+    # Para o algoritmo de fluxo máximo, conectamos uma Super_Fonte e Super_Sumidouro virtuais
+    grafo_log.adicionar_vertice("Super_Fonte", "auxiliar")
+    grafo_log.adicionar_vertice("Super_Sumidouro", "auxiliar")
+    
+    # Super-Fonte conectada às cozinhas (capacidade = capacidade da cozinha)
+    grafo_log.adicionar_conexao("Super_Fonte", "Cozinha_Central", tempo=0.0, capacidade=30)
+    grafo_log.adicionar_conexao("Super_Fonte", "Estacao_Auxiliar_Norte", tempo=0.0, capacidade=15)
+    
+    # Regiões conectadas ao Super-Sumidouro (capacidade = demanda máxima esperada por região)
+    grafo_log.adicionar_conexao("Zona_Sul", "Super_Sumidouro", tempo=0.0, capacidade=20)
+    grafo_log.adicionar_conexao("Zona_Norte", "Super_Sumidouro", tempo=0.0, capacidade=15)
+    grafo_log.adicionar_conexao("Zona_Oeste", "Super_Sumidouro", tempo=0.0, capacidade=10)
+
+    return grafo_log
 
 def main():
     receitas_salvas = carregar_receitas_do_json("receitas_locais.json")
@@ -103,8 +149,9 @@ def main():
         print("8. Oficina de Produção")
         print("9. Menu VIP")
         print("10. Desafio Logístico")
-        print("11. Sistema de Entregas")
-        print("12. Sair do Sistema")
+        print("11. Análise de Capacidade de Entregas")
+        print("12. Descoberta Automática de Famílias Culinárias")
+        print("13. Sair do Sistema")
         print("="*50)
         
         opcao = input("Escolha o modo de interação: ")
@@ -286,12 +333,63 @@ def main():
                     break
 
         elif opcao == "10":
-            pass
+            rede_logistica = inicializar_cenario_logistica(hash_sistema, ingredientes_estoque)
+            
+            print("\n" + "="*55)
+            print(f"{'DESAFIO LOGÍSTICO: INTERLIGAÇÃO E ROTAS':^55}")
+            print("="*55)
+            print("PONTOS OPERACIONAIS DISPONÍVEIS:")
+            for v_id, v in rede_logistica.vertices.items():
+                if v.tipo != "auxiliar":
+                    print(f"  • {v_id:<25} | Tipo: {v.tipo.upper()}")
+            print("-" * 55)
+            
+            origem = input("Digite o ponto de origem: ").strip()
+            destino = input("Digite o ponto de destino: ").strip()
+            
+            caminho, tempo_total = rede_logistica.calcular_rota_mais_rapida(origem, destino)
+            
+            if caminho:
+                print("\nROTA RECOMENDADA (Menor tempo de tráfego):")
+                print(" -> ".join(caminho))
+                print(f"Tempo operacional estimado: {tempo_total:.1f} minutos.")
+            else:
+                print("\nNão foi possível traçar uma rota entre esses dois pontos.")
+            print("="*55)
 
         elif opcao == "11":
+            # Inicializa o cálculo da capacidade e análise de gargalos
+            rede_logistica = inicializar_cenario_logistica(hash_sistema, ingredientes_estoque)
+            
+            fluxo_max, gargalos = rede_logistica.calcular_capacidade_maxima("Super_Fonte", "Super_Sumidouro")
+            
+            print("\n" + "="*55)
+            print(f"{'ANÁLISE DE CAPACIDADE DE ENTREGA DA COZINHA':^55}")
+            print("="*55)
+            print(f"CAPACIDADE MÁXIMA DE ATENDIMENTO SIMULTÂNEO: {fluxo_max} pedidos")
+            print("-" * 55)
+            
+            if gargalos:
+                print("GARGALOS OPERACIONAIS DETECTADOS:")
+                print("As seguintes rotas físicas operam em 100% da capacidade:")
+                for g in gargalos:
+                    # Oculta arestas auxiliares da exibição
+                    if "Super" not in g[0] and "Super" not in g[1]:
+                        print(f"Conexão: {g[0]} -> {g[1]} (Limite: {g[2]} pedidos/hora)")
+            else:
+                print("Não há gargalos ativos nas vias de transporte principais.")
+            print("="*55)
             pass
 
         elif opcao == "12":
+            lab = LaboratorioChef(hash_sistema)
+            try:
+                limiar = int(input("\nDigite o número mínimo de ingredientes compartilhados (ex: 2 ou 3): "))
+                lab.identificar_familias_culinarias(limiar_minimo=limiar)
+            except ValueError:
+                print("Digite um número inteiro válido.")
+
+        elif opcao == "13":
             print("\nEncerrando o sistema. Ate logo, Chef!")
             break
             
