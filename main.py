@@ -76,44 +76,56 @@ def carregar_estoque(caminho_arquivo: str) -> dict:
 def inicializar_cenario_logistica(hash_sistema, estoque) -> GrafoLogistica:
     grafo_log = GrafoLogistica()
     
-    # 1. Cadastrando os pontos operacionais (Vértices)
-    # Cozinhas de Preparo (Fontes de Produção)
     grafo_log.adicionar_vertice("Cozinha_Central", "cozinha", capacidade=30)
     grafo_log.adicionar_vertice("Estacao_Auxiliar_Norte", "cozinha", capacidade=15)
     
-    # Pontos de Retirada (Hubs)
     grafo_log.adicionar_vertice("Hub_Centro", "hub")
     grafo_log.adicionar_vertice("Hub_Leste", "hub")
     
-    # Regiões de Entrega (Destinos Finais)
     grafo_log.adicionar_vertice("Zona_Sul", "regiao")
     grafo_log.adicionar_vertice("Zona_Norte", "regiao")
     grafo_log.adicionar_vertice("Zona_Oeste", "regiao")
 
-    # 2. Conectando a infraestrutura física (Arestas)
-    # formato: adicionar_conexao(origem, destino, tempo_minutos, capacidade_pedidos)
     grafo_log.adicionar_conexao("Cozinha_Central", "Hub_Centro", tempo=8.0, capacidade=25)
     grafo_log.adicionar_conexao("Cozinha_Central", "Hub_Leste", tempo=15.0, capacidade=12)
     grafo_log.adicionar_conexao("Estacao_Auxiliar_Norte", "Hub_Centro", tempo=12.0, capacidade=10)
     
-    # Conexões Hub -> Regiões de Entrega
     grafo_log.adicionar_conexao("Hub_Centro", "Zona_Sul", tempo=10.0, capacidade=15)
     grafo_log.adicionar_conexao("Hub_Centro", "Zona_Norte", tempo=14.0, capacidade=8)
     grafo_log.adicionar_conexao("Hub_Leste", "Zona_Norte", tempo=9.0, capacidade=10)
     grafo_log.adicionar_conexao("Hub_Leste", "Zona_Oeste", tempo=18.0, capacidade=15)
-    
-    # Para o algoritmo de fluxo máximo, conectamos uma Super_Fonte e Super_Sumidouro virtuais
+
+    for i in range(1, 13):
+        nome_hub = f"Hub_Secundario_{i}"
+        grafo_log.adicionar_vertice(nome_hub, "hub")
+        
+        tempo_cc = 10.0 + (i % 3)
+        tempo_ean = 12.0 + (i % 4)
+        grafo_log.adicionar_conexao("Cozinha_Central", nome_hub, tempo=tempo_cc, capacidade=8)
+        grafo_log.adicionar_conexao("Estacao_Auxiliar_Norte", nome_hub, tempo=tempo_ean, capacidade=5)
+
+    for j in range(1, 16):
+        nome_regiao = f"Sub_Zona_{j}"
+        grafo_log.adicionar_vertice(nome_regiao, "regiao")
+        
+        hub_origem_1 = f"Hub_Secundario_{((j) % 12) + 1}"
+        hub_origem_2 = f"Hub_Secundario_{((j + 1) % 12) + 1}"
+        
+        grafo_log.adicionar_conexao(hub_origem_1, nome_regiao, tempo=7.0 + (j % 5), capacidade=10)
+        grafo_log.adicionar_conexao(hub_origem_2, nome_regiao, tempo=9.0 + (j % 4), capacidade=8)
+
     grafo_log.adicionar_vertice("Super_Fonte", "auxiliar")
     grafo_log.adicionar_vertice("Super_Sumidouro", "auxiliar")
     
-    # Super-Fonte conectada às cozinhas (capacidade = capacidade da cozinha)
     grafo_log.adicionar_conexao("Super_Fonte", "Cozinha_Central", tempo=0.0, capacidade=30)
     grafo_log.adicionar_conexao("Super_Fonte", "Estacao_Auxiliar_Norte", tempo=0.0, capacidade=15)
     
-    # Regiões conectadas ao Super-Sumidouro (capacidade = demanda máxima esperada por região)
     grafo_log.adicionar_conexao("Zona_Sul", "Super_Sumidouro", tempo=0.0, capacidade=20)
     grafo_log.adicionar_conexao("Zona_Norte", "Super_Sumidouro", tempo=0.0, capacidade=15)
     grafo_log.adicionar_conexao("Zona_Oeste", "Super_Sumidouro", tempo=0.0, capacidade=10)
+    
+    for j in range(1, 16):
+        grafo_log.adicionar_conexao(f"Sub_Zona_{j}", "Super_Sumidouro", tempo=0.0, capacidade=12)
 
     return grafo_log
 
@@ -358,7 +370,6 @@ def main():
             print("="*55)
 
         elif opcao == "11":
-            # Inicializa o cálculo da capacidade e análise de gargalos
             rede_logistica = inicializar_cenario_logistica(hash_sistema, ingredientes_estoque)
             
             fluxo_max, gargalos = rede_logistica.calcular_capacidade_maxima("Super_Fonte", "Super_Sumidouro")

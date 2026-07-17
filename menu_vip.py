@@ -34,12 +34,10 @@ class MenuVip:
     def maior_lucro(self, ingredientes_estoque, hash_sistema):
         todas_receitas = hash_sistema.obter_todas_receitas()
             
-        # 1. Padroniza as chaves do estoque simulado em minúsculas para busca precisa
         estoque_simulado = {k.lower().strip(): v for k, v in ingredientes_estoque.items()}
                    
         receitas_candidatas = []
         for r in todas_receitas:
-            # Puxa o custo real diretamente do seu objeto instanciado
             custo_real = getattr(r, 'custo', 0.0)
             qtd_ingredientes = len(r.ingredientes) if r.ingredientes else 1
             eficiencia = custo_real / qtd_ingredientes
@@ -59,7 +57,6 @@ class MenuVip:
             r = item["objeto"]
             pode_produzir = True
                 
-            # Garante que a busca no estoque simulado use strings minúsculas
             for ing in r.ingredientes:
                 ing_limpo = ing.lower().strip()
                 if estoque_simulado.get(ing_limpo, 0) < 1:
