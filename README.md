@@ -10,7 +10,7 @@
 
 ## 1. Sobre o Projeto e Arquivos de Dados
 
-O **Desafio na Cozinha** é uma aplicação de linha de comando (CLI) construída em Python que atua como um ecossistema completo de gestão e otimização gastronômica[cite: 7]. O sistema resolve problemas reais de indexação de receitas, detecção de adulterações, planejamento financeiro guloso, encadeamento de dependências de preparo, rotas de entrega urbana, capacidade de fluxo logístico máximo e agrupamento de famílias de pratos por similaridade de ingredientes.
+O **Desafio na Cozinha** é uma aplicação de linha de comando (CLI) construída em Python que atua como um ecossistema completo de gestão e otimização gastronômica. O sistema resolve problemas reais de indexação de receitas, detecção de adulterações, planejamento financeiro guloso, encadeamento de dependências de preparo, rotas de entrega urbana, capacidade de fluxo logístico máximo e agrupamento de famílias de pratos por similaridade de ingredientes.
 
 ### Arquivos de Dados e Persistência Local
 * **`receitas_locais.json`**: Base principal contendo 50 receitas fixas capturadas de forma autônoma da API global *TheMealDB* via `capturar_dados.py`. Para assegurar reprodutibilidade offline, atributos de custo financeiro (R$), tempo de preparo e avaliação são gerados deterministicamente usando o `idMeal` numérico como semente (`random.seed`).
